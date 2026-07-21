@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Year of Usi</title>
+<title>The Year of Zusi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -233,27 +233,24 @@
   .receipt-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.85rem; }
   .receipt-total { border-top: 1px dashed #a8a29e; padding-top: 20px; margin-top: 10px; font-weight: bold; font-size: 1.1rem; }
 
-  .audio-player {
-    background: var(--surface);
-    border: 1px solid var(--gold);
-    padding: 15px 20px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    max-width: 300px;
+  .final-video-wrap {
+    max-width: 400px;
     margin: 0 auto 50px auto;
-    cursor: pointer;
   }
-  .play-btn { color: var(--gold); font-size: 1.2rem; }
-  .audio-text { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--text-main); text-transform: uppercase; }
+  .final-note {
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    color: #c9c3bd;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
 
 </style>
 </head>
 <body>
 
 <audio id="bg-music" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
-<audio id="voice-note"><source src="voicenote.m4a" type="audio/mp4"></audio>
 
 <div id="unlock-screen">
   <div class="unlock-note">something I made for you</div>
@@ -262,8 +259,8 @@
 
 <section class="hero reveal">
   <div class="kicker">Happy Birthday</div>
-  <h1>To My <em>Usi</em></h1>
-  <p>The girl who's aced everything she's ever touched, and still, somehow, my favorite person to come home to.</p>
+  <h1>To My <em>Zusi</em></h1>
+  <p>The girl who's aced everything she's ever touched, and still, somehow, my favorite person.</p>
 </section>
 
 <section class="section reveal">
@@ -278,11 +275,11 @@
     </div>
     <div class="asset-card reveal">
       <h3>The Faith</h3>
-      <p>From your 5 AM clock-ins to your deep spiritual roots, you don't just talk about alignment, you live it. You're an anchor, mine included.</p>
+      <p>From your 4:30 AM clock-ins to your deep spiritual roots, you don't just talk about alignment, you live it. You're an anchor, mine included.</p>
     </div>
     <div class="asset-card reveal">
       <h3>The Heart</h3>
-      <p>Underneath the "Emi hard girl" exterior and the strict late fee policies is the gentlest, most thoughtful soul I know. You make everything around you better, including me.</p>
+      <p>You make everything around you better, including me.</p>
     </div>
   </div>
 </section>
@@ -316,12 +313,12 @@
       <div class="tribute-name">MaryKay</div>
     </div>
     <div class="tribute-item stagger-reveal">
-      <div class="tribute-note">From Favour Violet, a little birthday message straight from the heart.</div>
+      <div class="tribute-note">From Favour and Violet, a little birthday message straight from the heart.</div>
       <div class="video-container"><video src="5-Favour-Violet.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
-      <div class="tribute-name">Favour Violet</div>
+      <div class="tribute-name">Favour and Violet</div>
     </div>
     <div class="tribute-item stagger-reveal">
-      <div class="tribute-note">From Tobi, someone who's watched you grow and never stopped being proud of you.</div>
+      <div class="tribute-note">From Tobi, someone who's watched you grow in the ministry and never stopped being proud of you.</div>
       <div class="video-container"><video src="6-Tobi.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Tobi</div>
     </div>
@@ -331,22 +328,22 @@
       <div class="tribute-name">Ruth</div>
     </div>
     <div class="tribute-item stagger-reveal">
-      <div class="tribute-note">From Eki, a message she insisted on recording herself.</div>
+      <div class="tribute-note">From Eki, with love.</div>
       <div class="video-container"><video src="8-Eki.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Eki</div>
     </div>
     <div class="tribute-item stagger-reveal">
-      <div class="tribute-note">From Obehi, short and sincere, just like her.</div>
+      <div class="tribute-note">From Obehi, always sincere.</div>
       <div class="video-container"><video src="9-Obehi.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Obehi</div>
     </div>
     <div class="tribute-item stagger-reveal">
-      <div class="tribute-note">From Tomi, one of your longest running friendships, and one of your best.</div>
+      <div class="tribute-note">From Tomi, sending love from wherever she is right now.</div>
       <div class="video-container"><video src="10-Tomi.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Tomi</div>
     </div>
     <div class="tribute-item stagger-reveal">
-      <div class="tribute-note">From Yuki, sending love from wherever she is right now.</div>
+      <div class="tribute-note">From Yuki, one of your longest running friendships, and one of your best.</div>
       <div class="video-container"><video src="11-Yuki.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Yuki</div>
     </div>
@@ -356,12 +353,14 @@
 <section class="section reveal" style="margin-bottom: 100px;">
   <div class="section-header">
     <div class="kicker">one last thing</div>
-    <h2>The Receipt</h2>
+    <h2>Watch This</h2>
   </div>
 
-  <div class="audio-player reveal" onclick="playVoiceNote()">
-    <div class="play-btn" id="vn-icon">▶</div>
-    <div class="audio-text" id="vn-text">Play Voice Note</div>
+  <div class="final-video-wrap reveal">
+    <div class="final-note">One more thing, just for you.</div>
+    <div class="video-container">
+      <video src="final-message.mp4" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
   </div>
 
   <div class="invoice-container reveal">
@@ -410,33 +409,6 @@
     bgMusic.play().catch(e => console.log("Audio play blocked by browser"));
   }
 
-  function playVoiceNote() {
-    const vn = document.getElementById('voice-note');
-    const bgMusic = document.getElementById('bg-music');
-    const icon = document.getElementById('vn-icon');
-    const text = document.getElementById('vn-text');
-
-    if (vn.paused) {
-      bgMusic.volume = 0.05;
-      vn.play();
-      icon.innerHTML = '⏸';
-      text.innerHTML = 'Playing...';
-
-      document.querySelectorAll('.tribute-vid').forEach(v => v.pause());
-    } else {
-      vn.pause();
-      bgMusic.volume = 0.2;
-      icon.innerHTML = '▶';
-      text.innerHTML = 'Play Voice Note';
-    }
-
-    vn.onended = () => {
-      bgMusic.volume = 0.2;
-      icon.innerHTML = '▶';
-      text.innerHTML = 'Play Voice Note';
-    }
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     const normalReveals = document.querySelectorAll(".reveal");
     const normalObserver = new IntersectionObserver((entries, observer) => {
@@ -483,9 +455,6 @@
       tributeVideos.forEach(v => {
         if(v !== video) v.pause();
       });
-
-      const vn = document.getElementById('voice-note');
-      if (!vn.paused) playVoiceNote();
     });
 
     video.addEventListener('pause', () => {
