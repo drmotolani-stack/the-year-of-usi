@@ -287,6 +287,87 @@
     margin-bottom: 20px;
   }
 
+  /* PROGRESS INDICATOR */
+  #progress-rail {
+    position: fixed;
+    top: 0; right: 18px;
+    width: 2px; height: 100%;
+    background: rgba(255,255,255,0.06);
+    z-index: 500;
+    display: none;
+  }
+  #progress-fill {
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    height: 0%;
+    background: linear-gradient(to bottom, var(--gold), var(--rose));
+    box-shadow: 0 0 8px rgba(212,175,55,0.5);
+    transition: height 0.1s linear;
+  }
+
+  /* TOC CHIP MENU */
+  #toc-menu {
+    position: fixed;
+    top: 22px; left: 50%;
+    transform: translate(-50%, -80px);
+    z-index: 600;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    max-width: 92vw;
+    justify-content: center;
+    padding: 8px 10px;
+    background: rgba(12, 10, 9, 0.75);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--gold-muted);
+    border-radius: 30px;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    opacity: 0;
+  }
+  #toc-menu.visible { transform: translate(-50%, 0); opacity: 1; }
+  .toc-chip {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #d6d3d1;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 5px 11px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+  .toc-chip:hover, .toc-chip:focus {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(212,175,55,0.08);
+  }
+
+  /* TRIBUTE NUMBERING */
+  .tribute-index {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--gold-muted);
+    text-align: center;
+  }
+
+  /* GOLD DUST CONFETTI */
+  #dust-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  @media (max-width: 640px) {
+    #progress-rail { right: 8px; }
+    #toc-menu { top: 12px; gap: 4px; padding: 6px 8px; }
+    .toc-chip { font-size: 0.58rem; padding: 4px 9px; }
+  }
+
 </style>
 </head>
 <body>
@@ -298,6 +379,12 @@
   <div class="unlock-note">something I made for you</div>
   <button class="unlock-btn" onclick="enterSite()">Open It</button>
 </div>
+
+<canvas id="dust-canvas"></canvas>
+
+<div id="progress-rail"><div id="progress-fill"></div></div>
+
+<nav id="toc-menu"></nav>
 
 <section class="hero reveal">
   <div class="kicker">Happy Birthday</div>
@@ -363,62 +450,74 @@
   </div>
 
   <div class="tribute-grid">
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-fola">
+      <div class="tribute-index">01 / 12</div>
       <div class="tribute-note">From Fola, one of the people who's been there through it all.</div>
       <div class="video-container"><video src="1-Fola.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Fola</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-amazing-grace">
+      <div class="tribute-index">02 / 12</div>
       <div class="tribute-note">From Amazing Grace, because that's exactly what you are to the people around you.</div>
       <div class="video-container"><video src="2-Amazing-Grace.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Amazing Grace</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-jumoke">
+      <div class="tribute-index">03 / 12</div>
       <div class="tribute-note">From Jumoke, with love, and probably a little teasing too.</div>
       <div class="video-container"><video src="3-Jumoke.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Jumoke</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-marykay">
+      <div class="tribute-index">04 / 12</div>
       <div class="tribute-note">From MaryKay, one of your biggest cheerleaders, on and off the record.</div>
       <div class="video-container"><video src="4-MaryKay.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">MaryKay</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-favour-violet">
+      <div class="tribute-index">05 / 12</div>
       <div class="tribute-note">From Favour and Violet, a little birthday message straight from the heart.</div>
       <div class="video-container"><video src="5-Favour-Violet.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Favour and Violet</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-tobi">
+      <div class="tribute-index">06 / 12</div>
       <div class="tribute-note">From Tobi, someone who's watched you grow in the ministry and never stopped being proud of you.</div>
       <div class="video-container"><video src="6-Tobi.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Tobi</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-ruth">
+      <div class="tribute-index">07 / 12</div>
       <div class="tribute-note">From Ruth, with all the warmth she always brings.</div>
       <div class="video-container"><video src="7-Ruth.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Ruth</div>
     </div>
-    <div class="tribute-item stagger-reveal">
-      <div class="tribute-note">From Erhun, her brother, with love.</div>
+    <div class="tribute-item stagger-reveal" id="tribute-erhun">
+      <div class="tribute-index">08 / 12</div>
+      <div class="tribute-note">From Erhun, your brother, with love.</div>
       <div class="video-container"><video src="Erhun.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Erhun</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-eki">
+      <div class="tribute-index">09 / 12</div>
       <div class="tribute-note">From Eki, with love.</div>
       <div class="video-container"><video src="8-Eki.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Eki</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-obehi">
+      <div class="tribute-index">10 / 12</div>
       <div class="tribute-note">From Obehi, always sincere.</div>
       <div class="video-container"><video src="9-Obehi.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Obehi</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-tomi">
+      <div class="tribute-index">11 / 12</div>
       <div class="tribute-note">From Tomi, sending love from wherever she is right now.</div>
       <div class="video-container"><video src="10-Tomi.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Tomi</div>
     </div>
-    <div class="tribute-item stagger-reveal">
+    <div class="tribute-item stagger-reveal" id="tribute-yuki">
+      <div class="tribute-index">12 / 12</div>
       <div class="tribute-note">From Yuki, one of your longest running friendships, and one of your best.</div>
       <div class="video-container"><video src="11-Yuki.mp4" controls playsinline preload="metadata" class="tribute-vid"></video></div>
       <div class="tribute-name">Yuki</div>
@@ -475,6 +574,25 @@
 </section>
 
 <script>
+  // ---- Audio crossfade helper ----
+  let fadeInterval = null;
+  function fadeAudioTo(audio, targetVolume, duration = 500) {
+    clearInterval(fadeInterval);
+    const startVolume = audio.volume;
+    const steps = 24;
+    const stepTime = duration / steps;
+    let step = 0;
+    fadeInterval = setInterval(() => {
+      step++;
+      const t = step / steps;
+      audio.volume = startVolume + (targetVolume - startVolume) * t;
+      if (step >= steps) {
+        audio.volume = targetVolume;
+        clearInterval(fadeInterval);
+      }
+    }, stepTime);
+  }
+
   function enterSite() {
     const unlockScreen = document.getElementById('unlock-screen');
     const bgMusic = document.getElementById('bg-music');
@@ -483,6 +601,9 @@
     setTimeout(() => { unlockScreen.style.display = 'none'; }, 1000);
     bgMusic.volume = 0.2;
     bgMusic.play().catch(e => console.log("Audio play blocked by browser"));
+
+    burstGoldDust();
+    document.getElementById('progress-rail').style.display = 'block';
   }
 
   function playChime() {
@@ -533,22 +654,145 @@
   });
 
   const tributeVideos = document.querySelectorAll('.tribute-vid');
+  const bgMusic = document.getElementById('bg-music');
+
+  function duckBackgroundMusic() {
+    fadeAudioTo(bgMusic, 0.02, 400);
+  }
+
+  function restoreBackgroundMusic() {
+    const anyPlaying = Array.from(tributeVideos).some(v => !v.paused);
+    if (!anyPlaying) {
+      if (bgMusic.paused) {
+        bgMusic.volume = 0;
+        bgMusic.play().catch(e => console.log("Audio resume blocked by browser"));
+      }
+      fadeAudioTo(bgMusic, 0.2, 600);
+    }
+  }
+
   tributeVideos.forEach(video => {
     video.addEventListener('play', () => {
-      const bgMusic = document.getElementById('bg-music');
-      bgMusic.volume = 0.02;
-
+      duckBackgroundMusic();
       tributeVideos.forEach(v => {
-        if(v !== video) v.pause();
+        if (v !== video) v.pause();
       });
     });
 
-    video.addEventListener('pause', () => {
-      const anyPlaying = Array.from(tributeVideos).some(v => !v.paused);
-      if(!anyPlaying) {
-        document.getElementById('bg-music').volume = 0.2;
+    video.addEventListener('pause', restoreBackgroundMusic);
+    video.addEventListener('ended', restoreBackgroundMusic);
+  });
+
+  // ---- Scroll progress rail ----
+  const progressFill = document.getElementById('progress-fill');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressFill.style.height = Math.min(100, Math.max(0, pct)) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  // ---- TOC chip menu ----
+  const tocNames = [
+    { id: 'tribute-fola', label: 'Fola' },
+    { id: 'tribute-amazing-grace', label: 'Amazing Grace' },
+    { id: 'tribute-jumoke', label: 'Jumoke' },
+    { id: 'tribute-marykay', label: 'MaryKay' },
+    { id: 'tribute-favour-violet', label: 'Favour & Violet' },
+    { id: 'tribute-tobi', label: 'Tobi' },
+    { id: 'tribute-ruth', label: 'Ruth' },
+    { id: 'tribute-erhun', label: 'Erhun' },
+    { id: 'tribute-eki', label: 'Eki' },
+    { id: 'tribute-obehi', label: 'Obehi' },
+    { id: 'tribute-tomi', label: 'Tomi' },
+    { id: 'tribute-yuki', label: 'Yuki' }
+  ];
+  const tocMenu = document.getElementById('toc-menu');
+  tocNames.forEach(entry => {
+    const chip = document.createElement('button');
+    chip.className = 'toc-chip';
+    chip.textContent = entry.label;
+    chip.addEventListener('click', () => {
+      const target = document.getElementById(entry.id);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    tocMenu.appendChild(chip);
+  });
+
+  const heroEl = document.querySelector('.hero');
+  const tocObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        tocMenu.classList.add('visible');
+      } else {
+        tocMenu.classList.remove('visible');
       }
     });
+  }, { threshold: 0 });
+  if (heroEl) tocObserver.observe(heroEl);
+
+  // ---- Gold dust confetti burst ----
+  function burstGoldDust() {
+    const canvas = document.getElementById('dust-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#d4af37', '#e8b4b8', '#f5e7c1'];
+    const particles = [];
+    const count = 90;
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 2 + Math.random() * 6;
+      particles.push({
+        x: cx,
+        y: cy,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 2,
+        size: 2 + Math.random() * 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        life: 1,
+        decay: 0.008 + Math.random() * 0.012
+      });
+    }
+
+    let frame = 0;
+    function animate() {
+      frame++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let alive = false;
+      particles.forEach(p => {
+        if (p.life <= 0) return;
+        alive = true;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.05;
+        p.vx *= 0.99;
+        p.life -= p.decay;
+        ctx.globalAlpha = Math.max(0, p.life);
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      if (alive && frame < 300) {
+        requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', () => {
+    const canvas = document.getElementById('dust-canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
   });
 </script>
 
