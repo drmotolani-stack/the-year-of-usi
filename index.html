@@ -1,461 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Year of Usi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-color: #0c0a09; /* Deep, rich warm black */
-      --text-main: #f5f5f4; /* Soft cream */
-      --gold: #d4af37; /* Premium gold */
-      --gold-muted: rgba(212, 175, 55, 0.4);
-      --surface: #1c1917; /* Slightly lighter card background */
-      --serif: 'Cormorant Garamond', serif;
-      --mono: 'DM Mono', monospace;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Year of Usi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-color: #0c0a09; 
+    --text-main: #f5f5f4; 
+    --gold: #d4af37; 
+    --gold-muted: rgba(212, 175, 55, 0.4);
+    --surface: #1c1917; 
+    --serif: 'Cormorant Garamond', serif;
+    --mono: 'DM Mono', monospace;
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      font-family: var(--serif);
-      overflow-x: hidden;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--serif);
+    overflow-x: hidden;
+  }
 
-    /* Smooth scrolling and hiding scrollbar for a cleaner look */
-    html { scroll-behavior: smooth; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-thumb { background: var(--gold-muted); border-radius: 10px; }
+  html { scroll-behavior: smooth; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: var(--gold-muted); border-radius: 10px; }
 
-    /* SCROLL ANIMATION CLASS */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* SCROLL ANIMATION CLASS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    /* UNLOCK SCREEN */
-    #unlock-screen {
-      position: fixed;
-      inset: 0;
-      background: var(--bg-color);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 1s ease;
-    }
-    .unlock-btn {
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      padding: 15px 40px;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .unlock-btn:hover { background: rgba(212, 175, 55, 0.1); }
+  /* UNLOCK SCREEN */
+  #unlock-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease;
+  }
+  .unlock-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 15px 40px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .unlock-btn:hover { background: rgba(212, 175, 55, 0.1); }
 
-    /* SECTION 1: THE HOOK */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      background: radial-gradient(circle at center, #1c1917 0%, var(--bg-color) 70%);
-    }
-    .kicker {
-      font-family: var(--mono);
-      color: var(--gold);
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-    .hero h1 em { color: var(--gold); font-style: italic; }
-    .hero p {
-      font-size: clamp(1.2rem, 3vw, 1.5rem);
-      font-style: italic;
-      color: #a8a29e;
-      max-width: 600px;
-    }
+  /* SECTION 1: THE HOOK */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background: radial-gradient(circle at center, #1c1917 0%, var(--bg-color) 70%);
+  }
+  .kicker {
+    font-family: var(--mono);
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero p {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-style: italic;
+    color: #a8a29e;
+    max-width: 600px;
+  }
 
-    /* SECTION 2: THE PORTFOLIO */
-    .section {
-      padding: 100px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .section-header h2 {
-      font-size: 3rem;
-      font-weight: 300;
-      font-style: italic;
-    }
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    .asset-card {
-      background: var(--surface);
-      padding: 40px 30px;
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 4px;
-      transition: transform 0.3s ease;
-    }
-    .asset-card:hover { transform: translateY(-5px); border-color: var(--gold-muted); }
-    .asset-id {
-      font-family: var(--mono);
-      color: var(--gold);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      margin-bottom: 15px;
-    }
-    .asset-card h3 {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      font-weight: 400;
-    }
-    .asset-card p {
-      font-family: sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #d6d3d1;
-      font-weight: 300;
-    }
+  /* SECTION 2: THE PORTFOLIO */
+  .section {
+    padding: 100px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .section-header h2 {
+    font-size: 3rem;
+    font-weight: 300;
+    font-style: italic;
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  .asset-card {
+    background: var(--surface);
+    padding: 40px 30px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+  }
+  .asset-card:hover { transform: translateY(-5px); border-color: var(--gold-muted); }
+  .asset-id {
+    font-family: var(--mono);
+    color: var(--gold);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 15px;
+  }
+  .asset-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 400;
+  }
+  .asset-card p {
+    font-family: sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #d6d3d1;
+    font-weight: 300;
+  }
 
-    /* SECTION 3: THE TRIBUTES (BOARD OF DIRECTORS) */
-    .tribute-grid {
-      display: grid;
-      grid-template-columns: 1fr; /* 1 column on mobile */
-      gap: 40px;
-    }
-    
-    /* 2 columns on tablets */
-    @media (min-width: 600px) {
-      .tribute-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-    }
-    
-    /* 3 columns on laptops */
-    @media (min-width: 900px) {
-      .tribute-grid { grid-template-columns: repeat(3, 1fr); gap: 40px; }
-    }
+  /* SECTION 3: THE TRIBUTES (BOARD OF DIRECTORS) */
+  .tribute-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 column on mobile */
+    gap: 40px;
+  }
+  
+  /* 2 columns on tablets */
+  @media (min-width: 600px) {
+    .tribute-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+  }
+  
+  /* 3 columns on laptops */
+  @media (min-width: 900px) {
+    .tribute-grid { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  }
 
-    .stagger-reveal {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .stagger-reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .stagger-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .stagger-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    .video-container {
-      width: 100%;
-      position: relative;
-      /* Bulletproof 16:9 vertical ratio for mobile (9:16) */
-      padding-bottom: 177.77%; 
-      background: var(--surface);
-      border: 1px solid var(--gold-muted);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
+  .video-container {
+    width: 100%;
+    position: relative;
+    /* Bulletproof 16:9 vertical ratio for mobile */
+    padding-bottom: 177.77%; 
+    background: var(--surface);
+    border: 1px solid var(--gold-muted);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
 
-    .video-placeholder-inner {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #78716c;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
+  .video-placeholder-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #78716c;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
 
-    /* This styles the actual videos when you add them */
-    .video-container video {
-      position: absolute;
-      top: 0; left: 0; 
-      width: 100%; height: 100%;
-      object-fit: cover;
-      background: #000;
-    }
+  /* This styles the actual videos */
+  .video-container video {
+    position: absolute;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    object-fit: cover;
+    background: #000;
+  }
 
-    /* SECTION 4: THE INVOICE & VOICE NOTE */
-    .invoice-container {
-      max-width: 500px;
-      margin: 0 auto;
-      background: #f5f5f4; /* Receipt paper color */
-      color: #1c1917;
-      padding: 40px;
-      font-family: var(--mono);
-      border-radius: 2px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      position: relative;
-    }
-    /* Zig-zag receipt edge */
-    .invoice-container::after {
-      content: "";
-      position: absolute;
-      bottom: -10px; left: 0; right: 0; height: 10px;
-      background-size: 20px 20px;
-      background-image: radial-gradient(circle at 10px 0, transparent 12px, #f5f5f4 13px);
-    }
-    .receipt-header { text-align: center; border-bottom: 1px dashed #a8a29e; padding-bottom: 20px; margin-bottom: 20px; }
-    .receipt-header h2 { font-size: 1.2rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
-    .receipt-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.9rem; }
-    .receipt-total { border-top: 1px dashed #a8a29e; padding-top: 20px; margin-top: 10px; font-weight: bold; font-size: 1.1rem; }
+  /* SECTION 4: THE INVOICE & VOICE NOTE */
+  .invoice-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #f5f5f4; 
+    color: #1c1917;
+    padding: 40px;
+    font-family: var(--mono);
+    border-radius: 2px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .invoice-container::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; left: 0; right: 0; height: 10px;
+    background-size: 20px 20px;
+    background-image: radial-gradient(circle at 10px 0, transparent 12px, #f5f5f4 13px);
+  }
+  .receipt-header { text-align: center; border-bottom: 1px dashed #a8a29e; padding-bottom: 20px; margin-bottom: 20px; }
+  .receipt-header h2 { font-size: 1.2rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+  .receipt-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.9rem; }
+  .receipt-total { border-top: 1px dashed #a8a29e; padding-top: 20px; margin-top: 10px; font-weight: bold; font-size: 1.1rem; }
 
-    /* Minimal Audio Player */
-    .audio-player {
-      background: var(--surface);
-      border: 1px solid var(--gold);
-      padding: 15px 20px;
-      border-radius: 50px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      max-width: 300px;
-      margin: 0 auto 50px auto;
-      cursor: pointer;
-    }
-    .play-btn { color: var(--gold); font-size: 1.2rem; }
-    .audio-text { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--text-main); text-transform: uppercase; }
+  /* Minimal Audio Player */
+  .audio-player {
+    background: var(--surface);
+    border: 1px solid var(--gold);
+    padding: 15px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 300px;
+    margin: 0 auto 50px auto;
+    cursor: pointer;
+  }
+  .play-btn { color: var(--gold); font-size: 1.2rem; }
+  .audio-text { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--text-main); text-transform: uppercase; }
 
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Background Music & Voice Note -->
-  <audio id="bg-music" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
-  <audio id="voice-note"><source src="voicenote.m4a" type="audio/mp4"></audio>
+<!-- Background Music -->
+<audio id="bg-music" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
+<audio id="voice-note"><source src="voicenote.m4a" type="audio/mp4"></audio>
 
-  <!-- UNLOCK SCREEN -->
-  <div id="unlock-screen">
-    <button class="unlock-btn" onclick="enterSite()">Enter The Year of Usi</button>
+<!-- UNLOCK SCREEN -->
+<div id="unlock-screen">
+  <button class="unlock-btn" onclick="enterSite()">Enter The Year of Usi</button>
+</div>
+
+<!-- SECTION 1: HERO -->
+<section class="hero reveal">
+  <div class="kicker">An Executive Summary</div>
+  <h1>Happy Birthday to the <em>CEO</em></h1>
+  <p>The PMP Scholar. The Overall Best. And my favorite person.</p>
+</section>
+
+<!-- SECTION 2: PORTFOLIO -->
+<section class="section reveal">
+  <div class="section-header">
+    <div class="kicker">Section 01</div>
+    <h2>The Portfolio</h2>
+  </div>
+  <div class="portfolio-grid">
+    <div class="asset-card reveal">
+      <div class="asset-id">ASSET 01</div>
+      <h3>The Drive</h3>
+      <p>Watching you juggle EY deliverables, building ZWA, and serving in ministry without dropping a single ball is nothing short of incredible. You are a powerhouse.</p>
+    </div>
+    <div class="asset-card reveal">
+      <div class="asset-id">ASSET 02</div>
+      <h3>The Faith</h3>
+      <p>From your 5 AM clock-ins to your deep spiritual roots. You don't just speak about alignment, you live it. You are an absolute anchor.</p>
+    </div>
+    <div class="asset-card reveal">
+      <div class="asset-id">ASSET 03</div>
+      <h3>The Heart</h3>
+      <p>Underneath the "Emi hard girl" exterior and the strict late-fee policies is the gentlest, most thoughtful soul. You make everything around you better.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: BOARD OF DIRECTORS (TRIBUTES) -->
+<section class="section">
+  <div class="section-header reveal">
+    <div class="kicker">Section 02</div>
+    <h2>The Board of Directors</h2>
+    <p style="font-family: sans-serif; color: #a8a29e; font-size: 0.9rem; margin-top: 10px; font-weight: 300;">A few words from the stakeholders who love you most.</p>
+  </div>
+  
+  <div class="tribute-grid">
+    <div class="video-container stagger-reveal">
+      <video src="1-Fola.mp4" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="2-Amazing-Grace.mp4" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="3-Jumoke.mp4" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="4-MaryKay.mp4" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="5-Favour-Violet.mp4" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="6-Tobi.MOV" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="7-Ruth.mp4" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="8-Eki.mp4" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="9-Obehi.mp4" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="10-Tomi.MOV" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+    <div class="video-container stagger-reveal">
+      <video src="11-Yuki.MOV" controls playsinline preload="metadata" class="tribute-vid"></video>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: THE FINAL AUDIT (INVOICE & VN) -->
+<section class="section reveal" style="margin-bottom: 100px;">
+  <div class="section-header">
+    <div class="kicker">Section 03</div>
+    <h2>The Final Audit</h2>
   </div>
 
-  <!-- SECTION 1: HERO -->
-  <section class="hero reveal">
-    <div class="kicker">An Executive Summary</div>
-    <h1>Happy Birthday to the <em>CEO</em></h1>
-    <p>The PMP Scholar. The Overall Best. And my favorite person.</p>
-  </section>
+  <div class="audio-player reveal" onclick="playVoiceNote()">
+    <div class="play-btn" id="vn-icon">▶</div>
+    <div class="audio-text" id="vn-text">Play Voice Note</div>
+  </div>
 
-  <!-- SECTION 2: PORTFOLIO -->
-  <section class="section reveal">
-    <div class="section-header">
-      <div class="kicker">Section 01</div>
-      <h2>The Portfolio</h2>
-    </div>
-    <div class="portfolio-grid">
-      <div class="asset-card reveal">
-        <div class="asset-id">ASSET 01</div>
-        <h3>The Drive</h3>
-        <p>Watching you juggle EY deliverables, building ZWA, and serving in ministry without dropping a single ball is nothing short of incredible. You are a powerhouse.</p>
-      </div>
-      <div class="asset-card reveal">
-        <div class="asset-id">ASSET 02</div>
-        <h3>The Faith</h3>
-        <p>From your 5 AM clock-ins to your deep spiritual roots. You don't just speak about alignment, you live it. You are an absolute anchor.</p>
-      </div>
-      <div class="asset-card reveal">
-        <div class="asset-id">ASSET 03</div>
-        <h3>The Heart</h3>
-        <p>Underneath the "Emi hard girl" exterior and the strict late-fee policies is the gentlest, most thoughtful soul. You make everything around you better.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 3: BOARD OF DIRECTORS (TRIBUTES) -->
-  <section class="section">
-    <div class="section-header reveal">
-      <div class="kicker">Section 02</div>
-      <h2>The Board of Directors</h2>
-      <p style="font-family: sans-serif; color: #a8a29e; font-size: 0.9rem; margin-top: 10px; font-weight: 300;">A few words from the stakeholders who love you most.</p>
+  <div class="invoice-container reveal">
+    <div class="receipt-header">
+      <h2>The Billing Dept.</h2>
+      <div>Date: July 22, 2026</div>
+      <div>Client: Zusi Billions</div>
     </div>
     
-    <div class="tribute-grid">
-      
-      <!-- When ready to add real videos, uncomment the video tag below and replace the src -->
-      <div class="video-container stagger-reveal">
-        <!-- <video src="tribute-1.mp4" controls playsinline preload="metadata"></video> -->
-        <div class="video-placeholder-inner">Video 01 Pending</div>
-      </div>
-
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 02 Pending</div></div>
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 03 Pending</div></div>
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 04 Pending</div></div>
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 05 Pending</div></div>
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 06 Pending</div></div>
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 07 Pending</div></div>
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 08 Pending</div></div>
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 09 Pending</div></div>
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 10 Pending</div></div>
-      <div class="video-container stagger-reveal"><div class="video-placeholder-inner">Video 11 Pending</div></div>
-      
+    <div class="receipt-row">
+      <span>1x Year of Usi Celebration</span>
+      <span>Paid</span>
     </div>
-  </section>
-
-  <!-- SECTION 4: THE FINAL AUDIT (INVOICE & VN) -->
-  <section class="section reveal" style="margin-bottom: 100px;">
-    <div class="section-header">
-      <div class="kicker">Section 03</div>
-      <h2>The Final Audit</h2>
+    <div class="receipt-row">
+      <span>1x Lifetime of Alignment</span>
+      <span>Paid</span>
+    </div>
+    <div class="receipt-row">
+      <span>Unlimited Premium Jollof</span>
+      <span>Paid</span>
+    </div>
+    <div class="receipt-row">
+      <span>Late Reply Fines Reversed</span>
+      <span>-£5555.55</span>
     </div>
 
-    <div class="audio-player reveal" onclick="playVoiceNote()">
-      <div class="play-btn" id="vn-icon">▶</div>
-      <div class="audio-text" id="vn-text">Play Voice Note</div>
+    <div class="receipt-row receipt-total">
+      <span>AMOUNT DUE</span>
+      <span>£0.00</span>
     </div>
-
-    <div class="invoice-container reveal">
-      <div class="receipt-header">
-        <h2>The Billing Dept.</h2>
-        <div>Date: July 22, 2026</div>
-        <div>Client: Zusi Billions</div>
-      </div>
-      
-      <div class="receipt-row">
-        <span>1x Year of Usi Celebration</span>
-        <span>Paid</span>
-      </div>
-      <div class="receipt-row">
-        <span>1x Lifetime of Alignment</span>
-        <span>Paid</span>
-      </div>
-      <div class="receipt-row">
-        <span>Unlimited Premium Jollof</span>
-        <span>Paid</span>
-      </div>
-      <div class="receipt-row">
-        <span>Late Reply Fines Reversed</span>
-        <span>-£5555.55</span>
-      </div>
-
-      <div class="receipt-row receipt-total">
-        <span>AMOUNT DUE</span>
-        <span>£0.00</span>
-      </div>
-      
-      <div style="text-align: center; margin-top: 30px; font-size: 0.8rem; font-style: italic; color: #78716c; font-family: var(--serif);">
-        Fully sponsored by my love for you.<br>Happy Birthday.
-      </div>
+    
+    <div style="text-align: center; margin-top: 30px; font-size: 0.8rem; font-style: italic; color: #78716c; font-family: var(--serif);">
+      Fully sponsored by my love for you.<br>Happy Birthday.
     </div>
-  </section>
+  </div>
+</section>
 
-  <script>
-    // 1. Handle Unlock Screen & Audio
-    function enterSite() {
-      const unlockScreen = document.getElementById('unlock-screen');
-      const bgMusic = document.getElementById('bg-music');
+<script>
+  // 1. Handle Unlock Screen & Audio
+  function enterSite() {
+    const unlockScreen = document.getElementById('unlock-screen');
+    const bgMusic = document.getElementById('bg-music');
+    
+    unlockScreen.style.opacity = '0';
+    setTimeout(() => { unlockScreen.style.display = 'none'; }, 1000);
+    bgMusic.volume = 0.2;
+    bgMusic.play().catch(e => console.log("Audio play blocked by browser"));
+  }
+
+  // 2. Handle Voice Note Player
+  function playVoiceNote() {
+    const vn = document.getElementById('voice-note');
+    const bgMusic = document.getElementById('bg-music');
+    const icon = document.getElementById('vn-icon');
+    const text = document.getElementById('vn-text');
+
+    if (vn.paused) {
+      bgMusic.volume = 0.05; 
+      vn.play();
+      icon.innerHTML = '⏸';
+      text.innerHTML = 'Playing...';
       
-      unlockScreen.style.opacity = '0';
-      setTimeout(() => { unlockScreen.style.display = 'none'; }, 1000);
-      
+      // Pause any tribute videos if they are playing
+      document.querySelectorAll('.tribute-vid').forEach(v => v.pause());
+    } else {
+      vn.pause();
       bgMusic.volume = 0.2;
-      bgMusic.play().catch(e => console.log("Audio play blocked by browser, user must interact first."));
+      icon.innerHTML = '▶';
+      text.innerHTML = 'Play Voice Note';
     }
 
-    // 2. Handle Voice Note Player
-    function playVoiceNote() {
-      const vn = document.getElementById('voice-note');
-      const bgMusic = document.getElementById('bg-music');
-      const icon = document.getElementById('vn-icon');
-      const text = document.getElementById('vn-text');
-
-      if (vn.paused) {
-        bgMusic.volume = 0.05; 
-        vn.play();
-        icon.innerHTML = '⏸';
-        text.innerHTML = 'Playing...';
-      } else {
-        vn.pause();
-        bgMusic.volume = 0.2;
-        icon.innerHTML = '▶';
-        text.innerHTML = 'Play Voice Note';
-      }
-
-      vn.onended = () => {
-        bgMusic.volume = 0.2;
-        icon.innerHTML = '▶';
-        text.innerHTML = 'Play Voice Note';
-      }
+    vn.onended = () => {
+      bgMusic.volume = 0.2;
+      icon.innerHTML = '▶';
+      text.innerHTML = 'Play Voice Note';
     }
+  }
 
-    // 3. Smart Scroll Reveal & Stagger Animation
-    document.addEventListener("DOMContentLoaded", () => {
-      // Normal reveal for text blocks
-      const normalReveals = document.querySelectorAll(".reveal");
-      const normalObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
+  // 3. Smart Scroll Reveal & Stagger Animation
+  document.addEventListener("DOMContentLoaded", () => {
+    // Normal reveal for text blocks
+    const normalReveals = document.querySelectorAll(".reveal");
+    const normalObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: "0px" });
+
+    normalReveals.forEach(reveal => normalObserver.observe(reveal));
+
+    // Staggered reveal for the 11 videos
+    const staggerReveals = document.querySelectorAll(".stagger-reveal");
+    let delayCounter = 0;
+    let delayResetTimer = null;
+
+    const staggerObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
             entry.target.classList.add("active");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.05, rootMargin: "0px" });
+          }, delayCounter * 150);
+          
+          delayCounter++;
+          
+          clearTimeout(delayResetTimer);
+          delayResetTimer = setTimeout(() => { delayCounter = 0; }, 300);
 
-      normalReveals.forEach(reveal => normalObserver.observe(reveal));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: "0px" });
 
-      // Staggered reveal for the 11 videos
-      const staggerReveals = document.querySelectorAll(".stagger-reveal");
-      let delayCounter = 0;
-      let delayResetTimer = null;
+    staggerReveals.forEach(reveal => staggerObserver.observe(reveal));
+  });
 
-      const staggerObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // Apply a cascading delay (150ms between each video popping up)
-            setTimeout(() => {
-              entry.target.classList.add("active");
-            }, delayCounter * 150);
-            
-            delayCounter++;
-            
-            // Reset the counter if no new videos appear within 300ms
-            clearTimeout(delayResetTimer);
-            delayResetTimer = setTimeout(() => { delayCounter = 0; }, 300);
-
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.05, rootMargin: "0px" });
-
-      staggerReveals.forEach(reveal => staggerObserver.observe(reveal));
+  // 4. Intelligent Audio & Video Mixing
+  const tributeVideos = document.querySelectorAll('.tribute-vid');
+  tributeVideos.forEach(video => {
+    video.addEventListener('play', () => {
+      const bgMusic = document.getElementById('bg-music');
+      bgMusic.volume = 0.02; 
+      
+      tributeVideos.forEach(v => { 
+        if(v !== video) v.pause(); 
+      });
+      
+      const vn = document.getElementById('voice-note');
+      if (!vn.paused) playVoiceNote(); 
     });
-  </script>
+    
+    video.addEventListener('pause', () => {
+      const anyPlaying = Array.from(tributeVideos).some(v => !v.paused);
+      if(!anyPlaying) {
+        document.getElementById('bg-music').volume = 0.2;
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
