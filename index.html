@@ -109,6 +109,47 @@
     font-weight: 300;
   }
 
+  /* POLAROID PHOTOS */
+  .polaroid-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px 30px;
+    padding: 20px 0 40px 0;
+  }
+  .polaroid {
+    background: #f5f5f4;
+    padding: 16px 16px 50px 16px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+  }
+  .polaroid:nth-child(1) { transform: rotate(-4deg); }
+  .polaroid:nth-child(2) { transform: rotate(3deg); }
+  .polaroid:nth-child(3) { transform: rotate(-2deg); }
+  .polaroid:nth-child(4) { transform: rotate(5deg); }
+  .polaroid:nth-child(5) { transform: rotate(-3deg); }
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.6);
+    z-index: 5;
+  }
+  .polaroid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    background: var(--surface);
+  }
+  .polaroid-caption {
+    position: absolute;
+    bottom: 14px; left: 0; right: 0;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    color: #1c1917;
+    font-size: 0.9rem;
+  }
+
   .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -251,6 +292,7 @@
 <body>
 
 <audio id="bg-music" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
+<audio id="chime-sound"><source src="chime.mp3" type="audio/mpeg"></audio>
 
 <div id="unlock-screen">
   <div class="unlock-note">something I made for you</div>
@@ -261,6 +303,35 @@
   <div class="kicker">Happy Birthday</div>
   <h1>To My <em>Zusi</em></h1>
   <p>The girl who's aced everything she's ever touched, and still, somehow, my favorite person.</p>
+</section>
+
+<section class="section reveal">
+  <div class="section-header">
+    <div class="kicker">a few frozen moments</div>
+    <h2>Us, Lately</h2>
+  </div>
+  <div class="polaroid-grid">
+    <div class="polaroid">
+      <img src="photo-1.jpg" alt="A moment together">
+      <div class="polaroid-caption">just us</div>
+    </div>
+    <div class="polaroid">
+      <img src="photo-2.jpg" alt="A moment together">
+      <div class="polaroid-caption">that day</div>
+    </div>
+    <div class="polaroid">
+      <img src="photo-3.jpg" alt="A moment together">
+      <div class="polaroid-caption">still my favorite</div>
+    </div>
+    <div class="polaroid">
+      <img src="photo-4.jpg" alt="A moment together">
+      <div class="polaroid-caption">somewhere, sometime</div>
+    </div>
+    <div class="polaroid">
+      <img src="photo-5.jpg" alt="A moment together">
+      <div class="polaroid-caption">this one, always</div>
+    </div>
+  </div>
 </section>
 
 <section class="section reveal">
@@ -414,12 +485,22 @@
     bgMusic.play().catch(e => console.log("Audio play blocked by browser"));
   }
 
+  function playChime() {
+    const chime = document.getElementById('chime-sound');
+    const clone = chime.cloneNode(true);
+    clone.volume = 0.12;
+    clone.play().catch(e => console.log("Chime blocked by browser"));
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     const normalReveals = document.querySelectorAll(".reveal");
     const normalObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("active");
+          if (entry.target.tagName.toLowerCase() === 'section' && !entry.target.classList.contains('hero')) {
+            playChime();
+          }
           observer.unobserve(entry.target);
         }
       });
