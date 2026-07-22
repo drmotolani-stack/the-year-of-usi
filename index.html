@@ -720,17 +720,17 @@
     tocMenu.appendChild(chip);
   });
 
-  const heroEl = document.querySelector('.hero');
+  const tocTriggerEl = document.getElementById('tribute-favour-violet');
   const tocObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting) {
+      if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
         tocMenu.classList.add('visible');
       } else {
         tocMenu.classList.remove('visible');
       }
     });
-  }, { threshold: 0 });
-  if (heroEl) tocObserver.observe(heroEl);
+  }, { threshold: 0, rootMargin: "-20% 0px 0px 0px" });
+  if (tocTriggerEl) tocObserver.observe(tocTriggerEl);
 
   // ---- Gold dust confetti burst ----
   function burstGoldDust() {
